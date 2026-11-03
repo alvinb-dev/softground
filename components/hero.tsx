@@ -58,7 +58,7 @@ export function Hero() {
           <a href="#about" className="font-semibold underline decoration-ink underline-offset-2">
             Alvin Balemesa
           </a>
-          . 8+ years in product design. Product designer at Canva
+          . 8+ years in product design.
         </p>
         <ul className="flex flex-wrap items-center justify-center">
           {categories.map((category, index) => (
