@@ -54,11 +54,11 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto mt-12 flex max-w-[1100px] flex-col items-center gap-4 lg:mt-16">
         <p className="text-center text-base leading-[1.6] text-ink">
-          Led by{" "}
+          Leader by{" "}
           <a href="#about" className="font-semibold underline decoration-ink underline-offset-2">
             Alvin Balemesa
           </a>
-          . 8+ years in product design.
+          {" · Growth and AI product designer · 9 years experience · Over 5 at Canva"}
         </p>
         <ul className="flex flex-wrap items-center justify-center">
           {categories.map((category, index) => (
