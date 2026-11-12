@@ -2,15 +2,32 @@ import Image from "next/image";
 import { BookButton } from "@/components/book-button";
 import type { ServiceValue } from "@/lib/inquiry";
 
+function BlurredFigure({
+  children,
+  className = "",
+}: {
+  children: string;
+  className?: string;
+}) {
+  return (
+    <span aria-hidden className={`inline-block select-none ${className}`}>
+      {children}
+    </span>
+  );
+}
+
 const offers: {
   service: ServiceValue;
   title: string;
   description: string;
+  price: string;
   cadence: string[];
   heading: string;
   points: string[];
   cta: string;
   note: string;
+  noteFigure?: string;
+  noteSuffix?: string;
   badge?: string;
 }[] = [
   {
@@ -18,6 +35,7 @@ const offers: {
     title: "Conversion Audit",
     description:
       "Find out where you’re losing paying customers and what to fix first. A fixed-price review of one core journey.",
+    price: "$2,500",
     cadence: ["USD, fixed price", "10 business days"],
     heading: "What you get",
     points: [
@@ -36,6 +54,7 @@ const offers: {
     title: "Growth Design Monthly",
     description:
       "A focused growth workstream for teams with clear growth goals, tackled one at a time.",
+    price: "$9,000",
     cadence: ["USD / month", "Cancel anytime"],
     heading: "What’s included",
     points: [
@@ -54,6 +73,7 @@ const offers: {
     title: "Embedded Design Partner",
     description:
       "A senior product designer from 3 days a week, working across growth and your core product.",
+    price: "$12,000",
     cadence: ["USD / month", "Cancel anytime"],
     heading: "What’s included",
     points: [
@@ -66,7 +86,9 @@ const offers: {
       "Pairing with engineers and design QA of built work",
     ],
     cta: "Book a call",
-    note: "Extra days available, subject to availability.",
+    note: "Extra days ",
+    noteFigure: "$1,200/day",
+    noteSuffix: ", subject to availability.",
     badge: "Limited spots",
   },
 ];
@@ -105,12 +127,17 @@ export function Pricing() {
                     {offer.description}
                   </p>
                 </div>
-                <p className="text-[15px] leading-6 text-[#dadada]">
-                  {offer.cadence.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
+                <p className="flex flex-wrap items-end gap-3.5 text-white">
+                  <BlurredFigure className="text-[40px] leading-none blur-[14px] md:text-[48px]">
+                    {offer.price}
+                  </BlurredFigure>
+                  <span className="text-[15px] leading-6 text-[#dadada]">
+                    {offer.cadence.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </span>
                 </p>
                 <div className="flex flex-col gap-3">
                   <p className="font-mono text-base font-medium text-white uppercase">
@@ -134,9 +161,19 @@ export function Pricing() {
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <BookButton full size="lg" service={offer.service} label={offer.cta} className="rounded-xl" />
+                <BookButton
+                  full
+                  size="lg"
+                  service={offer.cta === "Book an audit" ? offer.service : undefined}
+                  label={offer.cta}
+                  className="rounded-xl"
+                />
                 <p className="text-center text-sm leading-6 text-[#dadada]">
                   {offer.note}
+                  {offer.noteFigure ? (
+                    <BlurredFigure className="text-sm leading-6 blur-[5px]">{offer.noteFigure}</BlurredFigure>
+                  ) : null}
+                  {offer.noteSuffix}
                 </p>
               </div>
             </article>

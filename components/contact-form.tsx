@@ -94,6 +94,14 @@ export function ContactExperience({
             Message
           </TabButton>
         </div>
+        {tab === "message" ? (
+          <p className="text-sm leading-[1.5] text-ink">
+            Or contact{" "}
+            <a href="mailto:hello@softground.digital" className="underline decoration-from-font">
+              hello@softground.digital
+            </a>
+          </p>
+        ) : null}
       </aside>
 
       <div className="min-w-0 flex-1">
@@ -186,7 +194,18 @@ function MessageForm({
   const errors = state.fieldErrors;
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form action={formAction} className="relative flex flex-col gap-6">
+      <div className="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="company_url">Company URL</label>
+        <input
+          id="company_url"
+          name="company_url"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
       <div className="grid gap-6 lg:grid-cols-2">
         <Field id="name" label="Your name" required error={errors?.name}>
           <input

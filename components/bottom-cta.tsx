@@ -19,7 +19,11 @@ export function BottomCta() {
           Softground is a good fit and where to start.
         </p>
         <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <BookButton label="Book a call" size="lg" className="w-[260px]" />
+          <BookButton
+            label="Book a 20-min intro call"
+            size="lg"
+            className="w-[260px] whitespace-nowrap"
+          />
           <BookButton
             label="Send a message instead"
             size="lg"

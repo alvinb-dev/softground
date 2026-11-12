@@ -11,7 +11,13 @@ const links = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
 ];
+
+function navHref(pathname: string, href: string) {
+  if (href.startsWith("/")) return href;
+  return pathname === "/" ? href : `/${href}`;
+}
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -37,7 +43,7 @@ export function Header() {
           {links.map((link) => (
             <Link
               key={link.href}
-              href={pathname === "/" ? link.href : `/${link.href}`}
+              href={navHref(pathname, link.href)}
               className="text-base font-medium whitespace-nowrap text-ink hover:opacity-70"
             >
               {link.label}
@@ -79,7 +85,7 @@ export function Header() {
             {links.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={pathname === "/" ? link.href : `/${link.href}`}
+                  href={navHref(pathname, link.href)}
                   className="block rounded-lg px-2 py-3 text-base font-medium text-ink"
                   onClick={() => setOpen(false)}
                 >

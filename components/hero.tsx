@@ -9,7 +9,7 @@ const categories = [
 
 export function Hero() {
   return (
-    <section className="relative z-10 px-6 pt-10 pb-16 md:px-12 md:pt-14 md:pb-20 lg:px-20 lg:pt-16 lg:pb-24">
+    <section className="relative z-10 flex flex-col px-6 pt-10 pb-6 md:px-12 md:pt-14 md:pb-8 lg:px-20 lg:pt-16 lg:pb-8">
       <div className="mx-auto flex max-w-[800px] flex-col items-center gap-8 text-center md:gap-10">
         <div className="flex flex-col gap-6">
           <h1 className="text-[40px] leading-[1.1] font-normal tracking-[-1px] text-white md:text-[56px] lg:text-[64px]">
@@ -29,19 +29,22 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <BookButton className="w-[220px]" label="Book a call" size="lg" />
+        <div className="flex flex-col items-center gap-3">
           <BookButton
-            className="w-[220px]"
-            label="Start with an audit"
+            className="whitespace-nowrap"
+            label="Book a 20-min intro call"
             size="lg"
-            variant="outline"
-            service="conversion-audit"
           />
+          <a
+            href="#pricing"
+            className="text-base leading-[1.6] font-semibold text-white underline decoration-white underline-offset-2"
+          >
+            See plans
+          </a>
         </div>
       </div>
 
-      <ul className="mx-auto mt-10 flex max-w-[1100px] flex-wrap items-center justify-center md:mt-14">
+      <ul className="mx-auto mt-8 flex max-w-[1100px] flex-wrap items-center justify-center">
         {categories.map((category, index) => (
           <li key={category} className="flex items-center">
             <span className="px-3 py-3 text-base font-medium text-white sm:px-6">

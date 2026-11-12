@@ -27,10 +27,6 @@ export function About() {
               products using their own research, customer feedback and
               analytics.
             </p>
-            <p className="font-medium">
-              Softground is an independent design studio and is not affiliated
-              with or endorsed by Canva.
-            </p>
           </div>
         </div>
         <div className="relative h-[520px] w-full overflow-hidden rounded-3xl bg-gradient-to-b from-lime to-paper sm:h-[600px] lg:h-[644px] lg:flex-1">
