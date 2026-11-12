@@ -203,6 +203,10 @@ function PricingSection({ revealPrices }: { revealPrices: boolean }) {
   );
 }
 
+export function PricingFallback() {
+  return <PricingSection revealPrices={false} />;
+}
+
 export async function Pricing() {
   const headerList = await headers();
   const revealPrices = revealPricesForHost(

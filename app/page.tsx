@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import { About } from "@/components/about";
 import { Approach } from "@/components/approach";
@@ -7,7 +8,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { Opportunity } from "@/components/opportunity";
-import { Pricing } from "@/components/pricing";
+import { Pricing, PricingFallback } from "@/components/pricing";
 import { Testimonials } from "@/components/testimonials";
 
 export default function Home() {
@@ -33,7 +34,9 @@ export default function Home() {
         <Testimonials />
         <About />
         <Approach />
-        <Pricing />
+        <Suspense fallback={<PricingFallback />}>
+          <Pricing />
+        </Suspense>
         <Faq />
         <BottomCta />
       </main>
