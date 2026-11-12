@@ -1,10 +1,7 @@
-import Image from "next/image";
 import { BookButton } from "@/components/book-button";
-import { Shape } from "@/components/shape";
 
 const categories = [
-  "Onboarding",
-  "Activation",
+  "Activation & engagement",
   "Paywalls & upgrades",
   "Trial conversion",
   "Retention",
@@ -12,67 +9,50 @@ const categories = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden px-6 pb-16 pt-16 md:px-12 md:pb-20 md:pt-20 lg:px-20 lg:pb-20 lg:pt-24">
-      <Shape
-        crop="cylinder"
-        priority
-        className="left-[-28px] top-2 hidden h-[120px] w-[122px] rotate-[25deg] blur-[1.5px] sm:block lg:left-[40px] lg:top-0 lg:h-[193px] lg:w-[196px]"
-      />
-      <Shape
-        crop="pyramid"
-        priority
-        className="-right-[180px] top-6 hidden h-[320px] w-[330px] -rotate-[22deg] md:block lg:-right-[220px] lg:top-2 lg:h-[537px] lg:w-[556px]"
-      />
-      <Shape
-        crop="cube"
-        priority
-        className="-bottom-24 -left-[220px] hidden h-[360px] w-[370px] -scale-y-100 rotate-[143deg] lg:block"
-      />
+    <section className="relative z-10 px-6 pt-10 pb-16 md:px-12 md:pt-14 md:pb-20 lg:px-20 lg:pt-16 lg:pb-24">
+      <div className="mx-auto flex max-w-[800px] flex-col items-center gap-8 text-center md:gap-10">
+        <div className="flex flex-col gap-6">
+          <h1 className="text-[40px] leading-[1.1] font-normal tracking-[-1px] text-white md:text-[56px] lg:text-[64px]">
+            Turn more free users into paying customers.
+          </h1>
+          <p className="text-base leading-[1.6] text-white md:text-lg">
+            Product design for software and subscription businesses, focused on
+            activation, conversion and retention. Work directly with{" "}
+            <a
+              href="#about"
+              className="font-semibold underline decoration-white underline-offset-2"
+            >
+              Alvin Balemesa
+            </a>
+            , a senior product designer with 9 years’ experience, including 5
+            at Canva.
+          </p>
+        </div>
 
-      <div className="relative z-10 mx-auto flex max-w-[800px] flex-col items-center gap-6 text-center">
-        <p className="font-mono text-xs font-medium uppercase text-ink">
-          Product experimentation for subscription & SaaS teams
-        </p>
-        <h1 className="text-[36px] font-normal leading-[1.15] tracking-[-1px] text-ink md:text-[48px] lg:text-[56px] lg:leading-[1.2]">
-          Turn more signups into active, paying customers
-        </h1>
-        <p className="max-w-[640px] text-base leading-[1.6] text-ink md:text-lg">
-          Softground helps you uncover what’s holding users back and design
-          focused experiments that make it easier to get started, find value
-          and take the next step.
-        </p>
-        <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-          <BookButton />
-          <a
-            href="#pricing"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-ink px-6 text-base font-medium text-ink transition hover:bg-ink/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-          >
-            See pricing
-          </a>
+        <div className="flex flex-col items-center gap-3 sm:flex-row">
+          <BookButton className="w-[220px]" label="Book a call" size="lg" />
+          <BookButton
+            className="w-[220px]"
+            label="Start with an audit"
+            size="lg"
+            variant="outline"
+            service="conversion-audit"
+          />
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-12 flex max-w-[1100px] flex-col items-center gap-4 lg:mt-16">
-        <p className="text-center text-base leading-[1.6] text-ink">
-          Led by{" "}
-          <a href="#about" className="font-semibold underline decoration-ink underline-offset-2">
-            Alvin Balemesa
-          </a>
-          . 8+ years in product design. Product designer at Canva
-        </p>
-        <ul className="flex flex-wrap items-center justify-center">
-          {categories.map((category, index) => (
-            <li key={category} className="flex items-center">
-              <span className="px-2 py-2 text-base font-medium text-ink sm:px-4 sm:py-3">
-                {category}
-              </span>
-              {index < categories.length - 1 ? (
-                <Image src="/icons/dot.svg" alt="" width={4} height={4} unoptimized />
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="mx-auto mt-10 flex max-w-[1100px] flex-wrap items-center justify-center md:mt-14">
+        {categories.map((category, index) => (
+          <li key={category} className="flex items-center">
+            <span className="px-3 py-3 text-base font-medium text-white sm:px-6">
+              {category}
+            </span>
+            {index < categories.length - 1 ? (
+              <span className="size-1 shrink-0 rounded-full bg-white" aria-hidden />
+            ) : null}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

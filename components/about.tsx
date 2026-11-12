@@ -3,31 +3,33 @@ import Image from "next/image";
 export function About() {
   return (
     <section id="about" className="px-6 py-12 md:px-12 md:py-16 lg:px-20 lg:py-20">
-      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-10 rounded-3xl bg-paper p-6 md:gap-12 md:rounded-[54px] md:p-10 lg:flex-row lg:gap-20">
+      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-10 rounded-[32px] border border-[#d4d4d4] bg-white p-6 md:gap-12 md:rounded-[54px] md:p-10 lg:flex-row lg:gap-20">
         <div className="w-full lg:w-[501px] lg:shrink-0 lg:px-10">
-          <h2 className="text-[32px] font-normal leading-[1.15] text-ink md:text-[40px] lg:text-[48px]">
-            Over 8 years designing digital products users love and pay for.
+          <h2 className="text-[32px] leading-[1.15] font-normal text-ink md:text-[40px] lg:text-[48px]">
+            Over 9 years designing digital products users love and pay for.
           </h2>
           <div className="mt-5 space-y-4 text-base leading-[1.5] text-ink">
             <p>
-              I’m Alvin Balemesa, the product designer behind Softground. I
-              currently work at Canva and bring over 8 years of product design
-              experience, including more than five years at Canva.
+              I’m Alvin Balemesa, Founder and Senior Product Designer at
+              Softground.
             </p>
             <p>
-              For 4 years, I worked in Canva’s Trials, Growth and Monetisation
-              teams, identifying opportunities, shaping hypotheses and designing
-              experiments to help users discover value and become paying
-              customers.
+              I spent five years at Canva during a period of significant
+              company growth, working across product design and
+              experimentation. My work focused on improving subscription
+              experiences, helping users discover value and making the path to
+              upgrading clearer and easy to understand.
             </p>
             <p>
-              Before Canva, I helped redesign Healthengine’s mobile app,
-              contributing to a 20% increase in bookings.
+              I prototype in code and work closely with engineers to explore
+              and refine interactions before they’re built. Through Softground,
+              I help software and subscription businesses improve their
+              products using their own research, customer feedback and
+              analytics.
             </p>
-            <p>
-              Through Softground, I bring that experience to SaaS and
-              subscription teams that want to help more users find value and
-              become paying customers.
+            <p className="font-medium">
+              Softground is an independent design studio and is not affiliated
+              with or endorsed by Canva.
             </p>
           </div>
         </div>

@@ -1,104 +1,143 @@
 import Image from "next/image";
 import { BookButton } from "@/components/book-button";
+import type { ServiceValue } from "@/lib/inquiry";
 
-const offers = [
+const offers: {
+  service: ServiceValue;
+  title: string;
+  description: string;
+  cadence: string[];
+  heading: string;
+  points: string[];
+  cta: string;
+  note: string;
+  badge?: string;
+}[] = [
   {
-    title: "Growth Opportunity Audit",
+    service: "conversion-audit",
+    title: "Conversion Audit",
     description:
-      "A review of one product surface or journey helping you understand what could be holding users back and where to focus next.",
-    price: "$990",
-    cadence: "USD per audit",
+      "Find out where you’re losing paying customers and what to fix first. A fixed-price review of one core journey.",
+    cadence: ["USD, fixed price", "10 business days"],
+    heading: "What you get",
     points: [
-      "Product walkthrough and review of existing data and insights",
-      "Key friction points and growth opportunities",
-      "Prioritised experiment ideas with supporting rationale",
-      "Recommended success measures",
-      "Findings report and a walkthrough of the recommendations",
+      "Review of one core journey, from sign-up to first payment",
+      "Top 5 opportunities, ranked by impact and effort",
+      "Experiment briefs for the top 3 opportunities",
+      "Concept designs for the #1 opportunity",
+      "Quick-fix list and the tracking gaps to close",
+      "Walkthrough call, recording and Figma files",
     ],
+    cta: "Book an audit",
+    note: "Fully credited if you start a monthly plan within 30 days.",
   },
   {
-    title: "Experiment Design Sprint",
+    service: "growth-design-monthly",
+    title: "Growth Design Monthly",
     description:
-      "Turn one defined product problem into an experiment design your team can implement.",
-    price: "$2500",
-    cadence: "USD per experiment",
+      "A focused growth workstream for teams with clear growth goals, tackled one at a time.",
+    cadence: ["USD / month", "Cancel anytime"],
+    heading: "What’s included",
     points: [
-      "Review of the chosen journey and available evidence",
-      "Clear hypothesis and agreed experiment scope",
-      "Success measures and guardrail metrics to watch for unintended effects",
-      "High-fidelity Figma designs with one round of refinements",
-      "Experiment brief and developer handoff",
+      "One growth area at a time: activation, conversion or retention",
+      "2–3 experiments designed every month",
+      "One active design request at a time",
+      "Monthly planning session to review results",
+      "Async updates twice a week",
+      "Handover support and design QA of built work",
     ],
+    cta: "Book a call",
+    note: "Billed monthly. No minimum term.",
   },
   {
-    title: "Growth Design Partner",
+    service: "embedded-design-partner",
+    title: "Embedded Design Partner",
     description:
-      "Ongoing growth strategy and design for a flat monthly fee. Cancel anytime.",
-    price: "$4500",
-    cadence: "USD per month",
+      "A senior product designer from 3 days a week, working across growth and your core product.",
+    cadence: ["USD / month", "Cancel anytime"],
+    heading: "What’s included",
     points: [
-      "Unlimited growth design requests, worked through one at a time",
-      "A shared monthly experiment roadmap and opportunity prioritisation",
-      "Experiment briefs, hypotheses and success measures",
-      "High-fidelity Figma designs, refinements and developer handoff",
-      "Regular review of available experiment findings and recommended next steps",
-      "Priority execution",
+      "3 dedicated days a week",
+      "Growth design plus your core product",
+      "Up to 2 active requests at a time",
+      "Weekly sync and input on your roadmap",
+      "Priority replies within 1 business day",
+      "Light usability testing and customer interviews",
+      "Pairing with engineers and design QA of built work",
     ],
+    cta: "Book a call",
+    note: "Extra days available, subject to availability.",
+    badge: "Limited spots",
   },
 ];
 
 export function Pricing() {
   return (
-    <section id="pricing" className="px-6 py-12 md:px-12 md:py-16 lg:px-20 lg:py-20">
-      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-12 lg:gap-16">
-        <div className="flex max-w-[638px] flex-col items-center gap-4 text-center">
-          <h2 className="text-[32px] font-normal leading-[1.15] text-ink md:text-[40px] lg:text-[48px]">
-            Select an offer to get started
+    <section id="pricing" className="px-6 py-16 md:px-12 md:py-20 lg:px-20">
+      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-12 lg:gap-14">
+        <div className="flex max-w-[720px] flex-col items-center gap-4 text-center">
+          <h2 className="text-[32px] leading-[1.15] font-normal text-ink md:text-[40px] lg:text-[48px]">
+            Start with an audit. Grow from there.
           </h2>
-          <p className="text-base leading-[1.4] text-ink md:text-lg">
-            Softground provides the strategy and design. Your team handles
-            development, test setup and measurement.
+          <p className="text-base leading-7 text-[#5f5f5f]">
+            You work directly with me on every engagement. Scope covers product
+            UX and UI. Branding and development are quoted separately.
           </p>
         </div>
         <div className="grid w-full items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {offers.map((offer) => (
             <article
               key={offer.title}
-              className="flex h-full flex-col rounded-3xl border border-line bg-card p-6 text-white md:p-12"
+              className="relative flex h-full flex-col justify-between gap-10 rounded-3xl border border-line bg-card p-6 text-white md:p-10"
             >
-              <div className="flex flex-1 flex-col gap-4">
-                <h3 className="text-[28px] font-normal leading-normal md:text-[32px]">
-                  {offer.title}
-                </h3>
-                <p className="text-base leading-[1.4] text-white/80">
-                  {offer.description}
+              {offer.badge ? (
+                <p className="absolute top-0 left-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-lavender px-4 py-2 font-mono text-sm font-medium tracking-normal whitespace-nowrap text-ink uppercase">
+                  <span className="size-2 rounded-full bg-ink" aria-hidden />
+                  {offer.badge}
                 </p>
-                <p className="flex flex-wrap items-baseline gap-2 text-white">
-                  <span className="text-[40px] leading-none md:text-[48px]">
-                    {offer.price}
-                  </span>
-                  <span className="text-xs leading-normal">{offer.cadence}</span>
-                </p>
-                <ul className="flex flex-col gap-4">
-                  {offer.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3">
-                      <Image
-                        src="/icons/check.svg"
-                        alt=""
-                        width={14}
-                        height={14}
-                        unoptimized
-                        className="mt-1 shrink-0"
-                      />
-                      <span className="text-base leading-normal text-white/80">
-                        {point}
-                      </span>
-                    </li>
+              ) : null}
+              <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-[28px] leading-tight font-normal md:text-[32px]">
+                    {offer.title}
+                  </h3>
+                  <p className="text-[17px] leading-relaxed text-[#dadada]">
+                    {offer.description}
+                  </p>
+                </div>
+                <p className="text-[15px] leading-6 text-[#dadada]">
+                  {offer.cadence.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
                   ))}
-                </ul>
+                </p>
+                <div className="flex flex-col gap-3">
+                  <p className="font-mono text-base font-medium text-white uppercase">
+                    {offer.heading}
+                  </p>
+                  <ul className="flex flex-col gap-3">
+                    {offer.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3">
+                        <Image
+                          src="/icons/check.svg"
+                          alt=""
+                          width={14}
+                          height={14}
+                          unoptimized
+                          className="mt-1 shrink-0"
+                        />
+                        <span className="text-base leading-snug">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="mt-10">
-                <BookButton full />
+              <div className="flex flex-col gap-4">
+                <BookButton full size="lg" service={offer.service} label={offer.cta} className="rounded-xl" />
+                <p className="text-center text-sm leading-6 text-[#dadada]">
+                  {offer.note}
+                </p>
               </div>
             </article>
           ))}

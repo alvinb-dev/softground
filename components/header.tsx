@@ -2,23 +2,27 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BookButton } from "@/components/book-button";
 
 const links = [
-  { href: "#what-you-get", label: "What you get" },
-  { href: "#how-we-work", label: "How we work" },
   { href: "#about", label: "About" },
+  { href: "#how-it-works", label: "How it works" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const homeHref = pathname === "/" ? "#top" : "/";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-transparent bg-white/90 backdrop-blur-md">
-      <div className="mx-auto grid h-20 max-w-[1440px] grid-cols-[1fr_auto] items-center px-6 md:px-12 lg:grid-cols-[1fr_auto_1fr] lg:px-20">
-        <a href="#top" className="justify-self-start" aria-label="Softground">
+    <>
+      <header className="sticky top-0 z-50 bg-white lg:fixed lg:inset-x-0 lg:bg-transparent lg:px-6 lg:pt-6">
+      <div className="flex w-full items-center justify-between gap-4 border-b border-line bg-white px-6 py-4 lg:mx-auto lg:max-w-[760px] lg:rounded-[20px] lg:border lg:border-white/70 lg:bg-white/90 lg:py-2 lg:pr-2 lg:pl-6 lg:shadow-[0_8px_30px_rgba(19,20,27,0.08)] lg:backdrop-blur-xl">
+        <Link href={homeHref} aria-label="Softground" className="shrink-0">
           <Image
             src="/images/logo.svg"
             alt="Softground"
@@ -27,27 +31,27 @@ export function Header() {
             unoptimized
             priority
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              className="text-base font-medium text-ink hover:opacity-70"
+              href={pathname === "/" ? link.href : `/${link.href}`}
+              className="text-base font-medium whitespace-nowrap text-ink hover:opacity-70"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <div className="hidden justify-self-end lg:block">
-          <BookButton />
+        <div className="hidden shrink-0 lg:block">
+          <BookButton label="Book a call" />
         </div>
 
         <button
           type="button"
-          className="justify-self-end rounded-lg p-2 text-ink lg:hidden"
+          className="rounded-lg p-2 text-ink lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -68,27 +72,33 @@ export function Header() {
       {open ? (
         <nav
           id="mobile-nav"
-          className="border-t border-line px-6 py-4 lg:hidden"
+          className="border-b border-line bg-white px-6 py-4 lg:hidden"
           aria-label="Mobile"
         >
           <ul className="flex flex-col gap-1">
             {links.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
+                <Link
+                  href={pathname === "/" ? link.href : `/${link.href}`}
                   className="block rounded-lg px-2 py-3 text-base font-medium text-ink"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
           <div className="mt-3">
-            <BookButton full />
+            <BookButton full label="Book a call" />
           </div>
         </nav>
       ) : null}
-    </header>
+      </header>
+      <div aria-hidden="true" className="pointer-events-none hidden lg:block lg:px-6 lg:pt-6">
+        <div className="border border-transparent py-2">
+          <div className="h-12" />
+        </div>
+      </div>
+    </>
   );
 }

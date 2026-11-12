@@ -38,3 +38,9 @@ body {
 section[id] {
   scroll-margin-top: 5rem;
 }
+
+@media (min-width: 1024px) {
+  section[id] {
+    scroll-margin-top: 7rem;
+  }
+}

@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Softground — Turn more signups into active, paying customers",
+  title: "Softground — Turn more free users into paying customers",
   description:
-    "Softground helps subscription and SaaS teams uncover what’s holding users back and design focused experiments that make it easier to get started, find value, and take the next step.",
+    "Product design for software and subscription businesses, focused on activation, conversion and retention. Work directly with Alvin Balemesa.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
