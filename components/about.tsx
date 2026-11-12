@@ -30,15 +30,13 @@ export function About() {
           </div>
         </div>
         <div className="relative h-[520px] w-full overflow-hidden rounded-3xl bg-gradient-to-b from-lime to-paper sm:h-[600px] lg:h-[644px] lg:flex-1">
-          <div className="absolute inset-x-3 top-10 bottom-0 overflow-hidden rounded-3xl sm:inset-x-4 sm:top-14">
-            <Image
-              src="/images/portrait.png"
-              alt="Alvin Balemesa"
-              fill
-              sizes="(min-width: 1024px) 496px, 100vw"
-              className="object-cover object-[center_18%]"
-            />
-          </div>
+          <Image
+            src="/images/portrait.png"
+            alt="Alvin Balemesa"
+            fill
+            sizes="(min-width: 1024px) 640px, 100vw"
+            className="object-cover object-[46%_22%]"
+          />
         </div>
       </div>
     </section>

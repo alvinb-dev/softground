@@ -1,16 +1,27 @@
 import Image from "next/image";
+import { headers } from "next/headers";
 import { BookButton } from "@/components/book-button";
 import type { ServiceValue } from "@/lib/inquiry";
 
-function BlurredFigure({
+function revealPricesForHost(host: string | null) {
+  const hostname = host?.split(",")[0]?.trim().split(":")[0].toLowerCase() ?? "";
+  return hostname === "softground.digital" || hostname === "www.softground.digital";
+}
+
+function PriceFigure({
   children,
   className = "",
+  blurred,
 }: {
   children: string;
   className?: string;
+  blurred: boolean;
 }) {
   return (
-    <span aria-hidden className={`inline-block select-none ${className}`}>
+    <span
+      aria-hidden={blurred ? true : undefined}
+      className={`inline-block ${blurred ? "select-none" : ""} ${className}`}
+    >
       {children}
     </span>
   );
@@ -93,7 +104,7 @@ const offers: {
   },
 ];
 
-export function Pricing() {
+function PricingSection({ revealPrices }: { revealPrices: boolean }) {
   return (
     <section id="pricing" className="px-6 py-16 md:px-12 md:py-20 lg:px-20">
       <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-12 lg:gap-14">
@@ -128,9 +139,12 @@ export function Pricing() {
                   </p>
                 </div>
                 <p className="flex flex-wrap items-end gap-3.5 text-white">
-                  <BlurredFigure className="text-[40px] leading-none blur-[14px] md:text-[48px]">
+                  <PriceFigure
+                    blurred={!revealPrices}
+                    className={`text-[40px] leading-none md:text-[48px] ${revealPrices ? "" : "blur-[14px]"}`}
+                  >
                     {offer.price}
-                  </BlurredFigure>
+                  </PriceFigure>
                   <span className="text-[15px] leading-6 text-[#dadada]">
                     {offer.cadence.map((line) => (
                       <span key={line} className="block">
@@ -171,7 +185,12 @@ export function Pricing() {
                 <p className="text-center text-sm leading-6 text-[#dadada]">
                   {offer.note}
                   {offer.noteFigure ? (
-                    <BlurredFigure className="text-sm leading-6 blur-[5px]">{offer.noteFigure}</BlurredFigure>
+                    <PriceFigure
+                      blurred={!revealPrices}
+                      className={`text-sm leading-6 ${revealPrices ? "" : "blur-[5px]"}`}
+                    >
+                      {offer.noteFigure}
+                    </PriceFigure>
                   ) : null}
                   {offer.noteSuffix}
                 </p>
@@ -182,4 +201,13 @@ export function Pricing() {
       </div>
     </section>
   );
+}
+
+export async function Pricing() {
+  const headerList = await headers();
+  const revealPrices = revealPricesForHost(
+    headerList.get("x-forwarded-host") ?? headerList.get("host"),
+  );
+
+  return <PricingSection revealPrices={revealPrices} />;
 }
