@@ -7,13 +7,16 @@ import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { JsonLd } from "@/components/json-ld";
 import { Opportunity } from "@/components/opportunity";
 import { Pricing, PricingFallback } from "@/components/pricing";
 import { Testimonials } from "@/components/testimonials";
+import { homeGraph } from "@/lib/structured-data";
 
 export default function Home() {
   return (
     <div id="top">
+      <JsonLd data={homeGraph()} />
         <div className="relative isolate z-50">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <Image

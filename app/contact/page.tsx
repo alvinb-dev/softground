@@ -4,12 +4,30 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ContactExperience, ContactExperienceFallback } from "@/components/contact-form";
 import { Header } from "@/components/header";
+import { JsonLd } from "@/components/json-ld";
 import { isContactTab, isServiceValue } from "@/lib/inquiry";
+import { contactGraph } from "@/lib/structured-data";
+import { contactDescription, contactPath, contactTitle, siteName } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Tell me about your product — Softground",
-  description:
-    "What are you working on, and what you’d like to improve? A short overview would be enough to start with.",
+  title: contactTitle,
+  description: contactDescription,
+  alternates: {
+    canonical: contactPath,
+  },
+  openGraph: {
+    title: `${contactTitle} — ${siteName}`,
+    description: contactDescription,
+    siteName,
+    type: "website",
+    url: contactPath,
+    locale: "en_AU",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${contactTitle} — ${siteName}`,
+    description: contactDescription,
+  },
 };
 
 export default function ContactPage({
@@ -19,6 +37,7 @@ export default function ContactPage({
 }) {
   return (
     <div>
+      <JsonLd data={contactGraph()} />
       <Header />
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-6 pt-6 pb-8 lg:gap-20 lg:px-20 lg:pt-8 lg:pb-12">
         <main className="mx-auto w-full max-w-[1234px]">

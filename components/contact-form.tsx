@@ -26,6 +26,7 @@ const controlClassName =
   "w-full rounded-xl border border-[#d4d4d4] bg-white px-4 text-base leading-[1.5] text-ink outline-none transition placeholder:text-[rgba(19,20,27,0.52)] focus:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink aria-[invalid=true]:border-ink";
 
 const labelClassName = "text-base leading-[1.5] font-semibold text-[#111]";
+const optionalClassName = "font-normal text-[#5f5f5f]";
 
 type ContactExperienceProps = {
   defaultService?: ServiceValue;
@@ -375,7 +376,11 @@ function Field({
     <div className="flex flex-col gap-2.5">
       <label htmlFor={id} className={labelClassName}>
         {label}
-        {required ? <span aria-hidden> *</span> : <span> (optional)</span>}
+        {required ? (
+          <span aria-hidden> *</span>
+        ) : (
+          <span className={optionalClassName}> (optional)</span>
+        )}
       </label>
       {children}
       {error ? (
@@ -411,7 +416,7 @@ function RadioGroup({
       className="flex flex-col gap-3"
     >
       <p id={labelId} className={labelClassName}>
-        {label} <span className="font-semibold">(optional)</span>
+        {label} <span className={optionalClassName}>(optional)</span>
       </p>
       {options.map((option) => (
         <RadioOption

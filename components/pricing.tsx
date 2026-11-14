@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { headers } from "next/headers";
 import { BookButton } from "@/components/book-button";
-import type { ServiceValue } from "@/lib/inquiry";
+import { OneOffBanner } from "@/components/one-off-banner";
+import { offers } from "@/lib/offers";
 
 function revealPricesForHost(host: string | null) {
   const hostname = host?.split(",")[0]?.trim().split(":")[0].toLowerCase() ?? "";
@@ -27,95 +28,33 @@ function PriceFigure({
   );
 }
 
-const offers: {
-  service: ServiceValue;
-  title: string;
-  description: string;
-  price: string;
-  cadence: string[];
-  heading: string;
-  points: string[];
-  cta: string;
-  note: string;
-  noteFigure?: string;
-  noteSuffix?: string;
-  badge?: string;
-}[] = [
-  {
-    service: "conversion-audit",
-    title: "Conversion Audit",
-    description:
-      "Find out where you’re losing paying customers and what to fix first. A fixed-price review of one core journey.",
-    price: "$2,500",
-    cadence: ["USD, fixed price", "10 business days"],
-    heading: "What you get",
-    points: [
-      "Review of one core journey, from sign-up to first payment",
-      "Top 5 opportunities, ranked by impact and effort",
-      "Experiment briefs for the top 3 opportunities",
-      "Concept designs for the #1 opportunity",
-      "Quick-fix list and the tracking gaps to close",
-      "Walkthrough call, recording and Figma files",
-    ],
-    cta: "Book an audit",
-    note: "Fully credited if you start a monthly plan within 30 days.",
-  },
-  {
-    service: "growth-design-monthly",
-    title: "Growth Design Monthly",
-    description:
-      "A focused growth workstream for teams with clear growth goals, tackled one at a time.",
-    price: "$9,000",
-    cadence: ["USD / month", "Cancel anytime"],
-    heading: "What’s included",
-    points: [
-      "One growth area at a time: activation, conversion or retention",
-      "2–3 experiments designed every month",
-      "One active design request at a time",
-      "Monthly planning session to review results",
-      "Async updates twice a week",
-      "Handover support and design QA of built work",
-    ],
-    cta: "Book a call",
-    note: "Billed monthly. No minimum term.",
-  },
-  {
-    service: "embedded-design-partner",
-    title: "Embedded Design Partner",
-    description:
-      "A senior product designer from 3 days a week, working across growth and your core product.",
-    price: "$12,000",
-    cadence: ["USD / month", "Cancel anytime"],
-    heading: "What’s included",
-    points: [
-      "3 dedicated days a week",
-      "Growth design plus your core product",
-      "Up to 2 active requests at a time",
-      "Weekly sync and input on your roadmap",
-      "Priority replies within 1 business day",
-      "Light usability testing and customer interviews",
-      "Pairing with engineers and design QA of built work",
-    ],
-    cta: "Book a call",
-    note: "Extra days ",
-    noteFigure: "$1,200/day",
-    noteSuffix: ", subject to availability.",
-    badge: "Limited spots",
-  },
-];
-
 function PricingSection({ revealPrices }: { revealPrices: boolean }) {
   return (
     <section id="pricing" className="px-6 py-16 md:px-12 md:py-20 lg:px-20">
       <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-12 lg:gap-14">
-        <div className="flex max-w-[720px] flex-col items-center gap-4 text-center">
-          <h2 className="text-[32px] leading-[1.15] font-normal text-ink md:text-[40px] lg:text-[48px]">
+        <div className="flex max-w-[1280px] flex-col items-center gap-[15px] text-center">
+          <h2 className="text-[32px] leading-[1.15] font-normal text-ink md:text-[40px] lg:text-[48px] lg:leading-[55px]">
             Start with an audit. Grow from there.
           </h2>
-          <p className="text-base leading-7 text-[#5f5f5f]">
-            You work directly with me on every engagement. Scope covers product
-            UX and UI. Branding and development are quoted separately.
-          </p>
+          <div className="flex flex-col items-center gap-2">
+            <p className="flex items-start justify-center gap-2.5 text-base leading-7 text-[#5f5f5f] sm:items-center">
+              <Image
+                src="/icons/shield-check.svg"
+                alt=""
+                width={20}
+                height={20}
+                unoptimized
+                className="mt-1 shrink-0 sm:mt-0"
+              />
+              <span>
+                <span className="font-semibold">Try any monthly plan for a week.</span>{" "}
+                Not the right fit? Get 75% back, no questions asked.
+              </span>
+            </p>
+            <p className="max-w-[706px] text-base leading-7 text-[#5f5f5f]">
+              Scope covers product UX and UI. Branding and development are quoted separately.
+            </p>
+          </div>
         </div>
         <div className="grid w-full items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {offers.map((offer) => (
@@ -198,6 +137,7 @@ function PricingSection({ revealPrices }: { revealPrices: boolean }) {
             </article>
           ))}
         </div>
+        <OneOffBanner />
       </div>
     </section>
   );
